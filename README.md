@@ -119,3 +119,10 @@ python scripts/tracker.py
 ## License
 
 MIT
+
+---
+
+## Disclaimer
+
+This project is an unofficial, independent open-source utility and is not affiliated with, endorsed by, or associated with Sony Interactive Entertainment Inc. PlayStation, PS5, PS4, and PSN are registered trademarks of Sony Interactive Entertainment Inc.
+
