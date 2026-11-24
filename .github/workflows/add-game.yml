@@ -1,0 +1,48 @@
+name: Watchlist Issue Manager
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  manage_watchlist:
+    runs-on: ubuntu-latest
+    if: >-
+      startsWith(github.event.issue.title, 'add') ||
+      startsWith(github.event.issue.title, 'Add') ||
+      startsWith(github.event.issue.title, 'track') ||
+      startsWith(github.event.issue.title, 'Track') ||
+      startsWith(github.event.issue.title, 'remove') ||
+      startsWith(github.event.issue.title, 'Remove') ||
+      startsWith(github.event.issue.title, 'delete') ||
+      startsWith(github.event.issue.title, 'Delete') ||
+      startsWith(github.event.issue.title, 'list') ||
+      startsWith(github.event.issue.title, 'List') ||
+      contains(github.event.issue.title, 'watchlist') ||
+      contains(github.event.issue.title, 'Watchlist') ||
+      contains(github.event.issue.title, 'playstation.com') ||
+      contains(github.event.issue.body, 'playstation.com')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Process issue request (add, remove, or list)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/add_game.py
+
+      - name: Commit and push changes if updated
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add games.json
+          git diff --staged --quiet || (git commit -m "chore: update watchlist via issue [skip ci]" && git push)

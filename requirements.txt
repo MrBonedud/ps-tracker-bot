@@ -1,0 +1,2 @@
+# Production dependencies
+# (Core scripts use only Python standard library modules: urllib, json, re, time, pathlib)
