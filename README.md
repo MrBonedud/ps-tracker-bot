@@ -34,6 +34,13 @@ Most open-source price scrapers use Playwright or Puppeteer to render the store'
 
 Click **Fork** at the top right to get your own copy. Keep your fork **Private** if you want your games list and Discord activity kept private, or **Public** to share.
 
+> [!WARNING]
+> **DO NOT try to add your wishlist games to this repo's `main` branch.**  
+> 1. It literally will not work—branch protection is locked down and direct pushes are blocked.  
+> 2. If you open a Pull Request trying to sneak your personal backlog onto my tracker, I *will* playfully roast you in the review comments before closing it with extreme prejudice.  
+> 
+> **Fork the repo** and run your tracker on your own copy! That's literally the entire point of open source.
+
 ### 2. Create a Discord Webhook
 
 1. In your Discord server, open **Channel Settings** &rarr; **Integrations** &rarr; **Webhooks**.
