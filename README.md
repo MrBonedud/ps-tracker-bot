@@ -15,9 +15,15 @@ Runs on a scheduled GitHub Actions cron job. Instead of spinning up heavy headle
 
 ## Why this exists
 
-The PlayStation Store sends generic promo emails, but it doesn't let you set custom price thresholds (e.g., *"ping me only if Sekiro drops under $25"*).
+The official PlayStation Store's wishlist situation is a comedy of errors:
 
-Most open-source price scrapers use Playwright or Puppeteer to render the store's Single Page App (SPA). That works, but downloading a 500MB Chromium instance on every GitHub Actions run eats up minutes and takes 2+ minutes per check. This project bypasses the browser completely by querying Sony's persisted GraphQL pricing operations directly.
+1. **The Great 2020 Deletion:** When Sony redesigned the web store for the PS5 launch, they famously deleted the entire wishlist feature overnight, wiping out millions of players' saved wishlists with zero warning.
+2. **The Hidden Return:** When they finally quietly brought a wishlist heart icon back in 2021, they hid it so well half the userbase still has no idea it exists—and if your list gets over ~100 games, the page famously glitches or turns blank.
+3. **Useless Generic Alerts:** Even if you use it, Sony only sends vague push alerts saying *"An item on your wishlist is on sale!"*—with zero price details, no All-Time Low detection, and no custom price thresholds (e.g. *"ping me only if Sekiro drops under $25, not when a $120 deluxe bundle gets $1.50 off"*).
+
+Most open-source price scrapers try to fix this by downloading a 500MB Chromium/Playwright browser on every single run to render the store's Single Page App (SPA). That works, but it takes minutes and chews through GitHub Actions quotas.
+
+This project bypasses the browser completely by querying Sony's persisted GraphQL pricing operations directly—checking an entire watchlist in ~10 seconds with zero infrastructure costs.
 
 ---
 
