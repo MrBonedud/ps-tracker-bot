@@ -1,5 +1,10 @@
 # ps-deal-tracker
 
+[![CI](https://github.com/MrBonedud/ps-tracker-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/MrBonedud/ps-tracker-bot/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Status: Vibecoded](https://img.shields.io/badge/status-vibecoded%20in%202h-ff69b4.svg)](#)
+
 A lightweight, serverless tracker that monitors PlayStation Store game discounts and pings you on Discord when games on your wishlist hit target prices.
 
 > Built and vibecoded in ~2 hours because PlayStation Store sales notifications are terrible.
@@ -24,7 +29,19 @@ Most open-source price scrapers use Playwright or Puppeteer to render the store'
 - **Dynamic countdowns:** Parses promo expiration times and renders dynamic Discord countdown timestamps (e.g. *Ends in 3 days*).
 - **Anti-spam logic:** Only pings when a deal starts or drops lower. When a sale ends, it resets so you get notified if the game goes on sale again later.
 - **Manage from your phone:** Add games, remove games, or view your watchlist simply by opening a GitHub Issue from the mobile app.
+- **US Store by default:** Tracks the US PlayStation Store (`en-US`). If you pay in Euros, Yen, or GBP, you get American freedom units. Support for other regions is just an override header away in `scripts/ps_api.py`.
 - **Tested:** Includes an automated `pytest` test suite with CI checks on push and PR.
+
+### What the alert looks like in Discord
+
+> 🔔 **DEAL ALERT: Bloodborne**
+> 
+> 💰 **Current Price:** ~~$19.99~~ **$9.99** `(-50% OFF)`  
+> 🎯 **Target Price:** $15.00  
+> ⭐ **Rating:** ★ 4.72 / 5 (52,431 ratings)  
+> ⏳ **Sale Ends:** in 3 days *(dynamic Discord timestamp)*  
+> 🔥 **NEW ALL-TIME LOW!** *(Cheapest price recorded since tracking started)*  
+> 🔗 [View on PlayStation Store](https://store.playstation.com/en-us/product/UP9000-CUSA00900_00-BLOODBORNE000000)
 
 ---
 
@@ -55,6 +72,14 @@ In your GitHub repository, go to **Settings** &rarr; **Secrets and variables** &
 | :--- | :--- | :--- |
 | `DISCORD_WEBHOOK_URL` | `https://discord.com/api/webhooks/...` | Your Discord webhook endpoint. |
 | `DISCORD_USER_ID` | `123456789012345678` | *(Optional)* Your Discord ID to ping you directly. |
+
+### 4. Enable Workflows (Don't skip this!)
+
+GitHub automatically disables Actions on forked repositories by default so people don't accidentally mine crypto on their servers:
+
+1. Go to your fork's **Actions** tab.
+2. Click the big green button: **"I understand my workflows, go ahead and enable them"**.
+3. Select **PlayStation Deal Tracker** on the left &rarr; **Run workflow** to test your Discord webhook immediately and make sure you didn't botch the secret names.
 
 ---
 
